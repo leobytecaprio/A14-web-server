@@ -60,6 +60,8 @@ body::before {
   backdrop-filter: blur(20px);
   animation: slide-up 1s ease-out;
   position: relative;
+  overflow: visible; /* Allow overflow so pfp can stick out */
+  padding-top: 70px; 
 }
 
 .container::before {
@@ -83,10 +85,12 @@ body::before {
 }
 
 .pfp-container {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 2rem;
-  position: relative;
+  position: absolute;
+  top: -60px; /* Adjust value so that half the pfp is outside */
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 0;
+  z-index: 2;
 }
 
 .pfp {
