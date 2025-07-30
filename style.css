@@ -323,3 +323,13 @@ body::before {
     height: 70px;
   }
 }
+
+media (pointer: coarse) {
+  .pfp-container:hover .pfp {
+    transform: none !important;
+  }
+
+  .pfp-container:hover::before {
+    opacity: 0 !important;
+  }
+}
