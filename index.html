@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>[A14] Gateway - Managed by Kiwi</title>
+  <title>[A14] SyncGate - Managed by Kiwi</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
     
     * {
       margin: 0;
@@ -14,17 +14,21 @@
     }
     
     body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #1a1a1a 0%, #2d1b1b 50%, #1f1a00 100%);
+      font-family: 'Space Grotesk', sans-serif;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(220, 20, 60, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 193, 7, 0.15) 0%, transparent 50%),
+        linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 25%, #2d1b1b 50%, #1f1a00 75%, #0d0d0d 100%);
       color: #e8e8e8;
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
+      overflow-x: hidden;
     }
     
-    /* Subtle background texture */
+    /* Animated particles */
     body::before {
       content: '';
       position: absolute;
@@ -32,117 +36,269 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: radial-gradient(circle at 25% 25%, rgba(220, 20, 60, 0.03) 0%, transparent 50%),
-                        radial-gradient(circle at 75% 75%, rgba(255, 193, 7, 0.03) 0%, transparent 50%);
+      background-image: 
+        radial-gradient(2px 2px at 20px 30px, rgba(220, 20, 60, 0.3), transparent),
+        radial-gradient(2px 2px at 40px 70px, rgba(255, 193, 7, 0.3), transparent),
+        radial-gradient(1px 1px at 90px 40px, rgba(220, 20, 60, 0.4), transparent),
+        radial-gradient(1px 1px at 130px 80px, rgba(255, 193, 7, 0.4), transparent);
+      background-repeat: repeat;
+      background-size: 200px 120px;
+      animation: float 20s linear infinite;
+      opacity: 0.6;
       z-index: -1;
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0px) translateX(0px); }
+      33% { transform: translateY(-30px) translateX(10px); }
+      66% { transform: translateY(-60px) translateX(-10px); }
+      100% { transform: translateY(-120px) translateX(0px); }
     }
     
     .container {
       text-align: center;
-      max-width: 480px;
-      padding: 2.5rem;
-      background: rgba(30, 30, 30, 0.85);
-      border: 1px solid rgba(220, 20, 60, 0.2);
-      border-radius: 8px;
+      max-width: 600px;
+      padding: 3rem 2.5rem;
+      background: 
+        linear-gradient(135deg, rgba(15, 15, 15, 0.95) 0%, rgba(25, 25, 25, 0.9) 100%);
+      border: 1px solid rgba(220, 20, 60, 0.3);
+      border-radius: 16px;
       box-shadow: 
-        0 8px 32px rgba(0, 0, 0, 0.3),
-        0 0 0 1px rgba(255, 193, 7, 0.1);
-      backdrop-filter: blur(10px);
-      animation: fade-in 0.8s ease-out;
+        0 20px 40px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(255, 193, 7, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      animation: slide-up 1s ease-out;
+      position: relative;
     }
     
-    @keyframes fade-in {
+    .container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 193, 7, 0.5), transparent);
+    }
+    
+    @keyframes slide-up {
       from { 
         opacity: 0; 
-        transform: translateY(10px); 
+        transform: translateY(30px) scale(0.95); 
       }
       to { 
         opacity: 1; 
-        transform: translateY(0); 
+        transform: translateY(0) scale(1); 
       }
     }
     
     .header {
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
+      position: relative;
     }
     
     .logo {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 1rem;
-      margin-bottom: 1rem;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .pfp-container {
+      position: relative;
     }
     
     .pfp {
-      width: 80px;
-      height: 80px;
+      width: 90px;
+      height: 90px;
       border-radius: 50%;
-      border: 2px solid rgba(220, 20, 60, 0.4);
+      border: 3px solid rgba(220, 20, 60, 0.5);
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .pfp-container::before {
+      content: '';
+      position: absolute;
+      top: -3px;
+      left: -3px;
+      right: -3px;
+      bottom: -3px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, #dc143c, #ffc107, #dc143c);
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .pfp-container:hover::before {
+      opacity: 0.6;
+    }
+    
+    .pfp-container:hover .pfp {
+      transform: scale(1.05);
+    }
+    
+    .title-section {
+      flex: 1;
     }
     
     .title {
-      font-size: 1.8rem;
-      font-weight: 600;
-      color: #dc143c;
+      font-size: 2.2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #dc143c 0%, #ff4569 50%, #ffc107 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       margin: 0;
-      letter-spacing: 1px;
+      letter-spacing: 2px;
+      line-height: 1.2;
     }
     
     .subtitle {
-      font-size: 0.85rem;
-      color: #ffc107;
-      margin-top: 0.3rem;
+      font-size: 0.9rem;
+      color: rgba(255, 193, 7, 0.8);
+      margin-top: 0.5rem;
       font-weight: 400;
-      opacity: 0.9;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .status-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: rgba(0, 255, 65, 0.8);
+    }
+    
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #00ff41;
+      animation: pulse-dot 2s infinite;
+    }
+    
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
     }
     
     .description {
-      font-size: 0.95rem;
-      color: #b8b8b8;
-      margin: 1.5rem 0;
-      line-height: 1.5;
+      font-size: 1.05rem;
+      color: #c8c8c8;
+      margin: 2rem 0;
+      line-height: 1.7;
       font-weight: 300;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
     }
     
-    .agent-link {
-      display: inline-block;
-      padding: 0.9rem 2rem;
-      background: linear-gradient(135deg, #dc143c 0%, #b91c3c 100%);
-      border: none;
-      color: #fff;
-      text-decoration: none;
-      font-family: 'Inter', sans-serif;
+    .description strong {
+      color: #ffc107;
       font-weight: 500;
-      font-size: 0.9rem;
-      border-radius: 6px;
-      transition: all 0.2s ease;
-      box-shadow: 0 4px 12px rgba(220, 20, 60, 0.2);
     }
     
-    .agent-link:hover {
-      background: linear-gradient(135deg, #e31e47 0%, #c92041 100%);
+    .report-section {
+      background: linear-gradient(135deg, rgba(220, 20, 60, 0.08) 0%, rgba(255, 193, 7, 0.05) 100%);
+      border: 1px solid rgba(220, 20, 60, 0.2);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .report-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 193, 7, 0.1), transparent);
+      animation: scan 3s linear infinite;
+    }
+    
+    @keyframes scan {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+    
+    .report-title {
+      color: #dc143c;
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    
+    .report-content {
+      color: rgba(255, 193, 7, 0.9);
+      font-size: 0.9rem;
+    }
+    
+    .userid {
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 0.3rem 0.8rem;
+      border-radius: 6px;
+      color: #ffc107;
+      font-size: 0.85rem;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.2s ease;
+      border: 1px solid rgba(255, 193, 7, 0.3);
+    }
+    
+    .userid:hover {
+      background: rgba(255, 193, 7, 0.1);
       transform: translateY(-1px);
-      box-shadow: 0 6px 16px rgba(220, 20, 60, 0.3);
+      box-shadow: 0 4px 8px rgba(255, 193, 7, 0.2);
     }
     
     .footer {
-      margin-top: 2rem;
-      font-size: 0.75rem;
+      margin-top: 2.5rem;
+      font-size: 0.8rem;
       color: rgba(255, 193, 7, 0.6);
       font-weight: 300;
+      font-family: 'JetBrains Mono', monospace;
+      border-top: 1px solid rgba(255, 193, 7, 0.1);
+      padding-top: 1.5rem;
+    }
+    
+    .tech-grid {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background-image: 
+        linear-gradient(rgba(220, 20, 60, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(220, 20, 60, 0.1) 1px, transparent 1px);
+      background-size: 10px 10px;
+      opacity: 0.3;
     }
     
     .error-container {
-      border-color: rgba(220, 20, 60, 0.4);
-      box-shadow: 
-        0 8px 32px rgba(0, 0, 0, 0.3),
-        0 0 0 1px rgba(220, 20, 60, 0.2);
+      border-color: rgba(220, 20, 60, 0.5);
+      background: linear-gradient(135deg, rgba(20, 15, 15, 0.95) 0%, rgba(30, 20, 20, 0.9) 100%);
     }
     
     .error-title {
       color: #dc143c;
-      font-size: 1.6rem;
+      font-size: 1.8rem;
       font-weight: 600;
       margin-bottom: 1rem;
     }
@@ -151,51 +307,48 @@
       color: #e8e8e8;
       margin-bottom: 1.5rem;
       line-height: 1.6;
-    }
-    
-    .report-section {
-      background: rgba(220, 20, 60, 0.05);
-      border: 1px solid rgba(220, 20, 60, 0.15);
-      border-radius: 6px;
-      padding: 1rem;
-      margin: 1.5rem 0;
-      font-size: 0.85rem;
-    }
-    
-    .report-title {
-      color: #ffc107;
-      font-weight: 500;
-      margin-bottom: 0.5rem;
-    }
-    
-    .userid {
-      font-family: 'Courier New', monospace;
-      background: rgba(0, 0, 0, 0.3);
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
-      color: #ffc107;
-      font-size: 0.8rem;
+      font-size: 1rem;
     }
     
     /* Mobile responsiveness */
     @media (max-width: 768px) {
       .container {
         margin: 1rem;
-        padding: 2rem;
+        padding: 2rem 1.5rem;
+      }
+      
+      .logo {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .pfp {
+        width: 80px;
+        height: 80px;
+      }
+      
+      .title {
+        font-size: 1.8rem;
+      }
+      
+      .description {
+        font-size: 1rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .container {
+        padding: 1.5rem 1rem;
+      }
+      
+      .title {
+        font-size: 1.6rem;
+        letter-spacing: 1px;
       }
       
       .pfp {
         width: 70px;
         height: 70px;
-      }
-      
-      .title {
-        font-size: 1.6rem;
-      }
-      
-      .agent-link {
-        padding: 0.8rem 1.8rem;
-        font-size: 0.85rem;
       }
     }
   </style>
@@ -222,27 +375,31 @@
       document.addEventListener("DOMContentLoaded", () => {
         document.body.innerHTML = `
           <div class="container error-container">
+            <div class="tech-grid"></div>
             <div class="header">
               <div class="logo">
-                <img src="https://files.catbox.moe/nyjkcw.jpg" alt="Kiwi Profile" class="pfp">
-                <div>
+                <div class="pfp-container">
+                  <img src="https://files.catbox.moe/nyjkcw.jpg" alt="Kiwi Profile" class="pfp">
+                </div>
+                <div class="title-section">
                   <h1 class="error-title">Access Denied</h1>
-                  <p class="subtitle">KWSA14 - System Alert</p>
+                  <p class="subtitle">KWSA14 - Security Alert</p>
+                  <div class="status-bar">
+                    <div class="status-dot" style="background: #dc143c;"></div>
+                    <span style="color: #dc143c;">OFFLINE</span>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="error-desc">
-              Invalid or expired link detected. Connection terminated for security reasons.
+              <strong>Connection terminated.</strong> Your access token is invalid or has expired. The secure gateway has blocked this request for security reasons.
             </div>
             <div class="report-section">
-              <div class="report-title">Report this issue to [A14] Rebecca</div>
-              <div>User ID: <span class="userid">@A14_Assistant_bot</span></div>
+              <div class="report-title">🚨 Security Incident</div>
+              <div class="report-content">Report to [A14] Rebecca: <a href="https://t.me/A14_Assistant_bot" target="_blank" class="userid">@A14_Assistant_bot</a></div>
             </div>
-            <a href="https://t.me/A14_Agent" target="_blank" class="agent-link">
-              Contact [A14] Agent
-            </a>
             <div class="footer">
-              Powered by Project-A14 • Managed by Kiwi
+              POWERED BY PROJECT-A14 • MANAGED BY KIWI • KWSA14
             </div>
           </div>`;
       });
@@ -251,27 +408,34 @@
 </head>
 <body>
   <div class="container">
+    <div class="tech-grid"></div>
     <div class="header">
       <div class="logo">
-        <img src="https://files.catbox.moe/nyjkcw.jpg" alt="Kiwi Profile" class="pfp">
-        <div>
+        <div class="pfp-container">
+          <img src="https://files.catbox.moe/nyjkcw.jpg" alt="Kiwi Profile" class="pfp">
+        </div>
+        <div class="title-section">
           <h1 class="title">[A14] SyncGate</h1>
           <p class="subtitle">Managed by Kiwi • KWSA14</p>
+          <div class="status-bar">
+            <div class="status-dot"></div>
+            <span>ONLINE</span>
+          </div>
         </div>
       </div>
     </div>
     
     <div class="description">
-      Secure gateway to the [A14] Agent — a decentralized system of Telegram-based assistants. Verifies encrypted access tokens and instantly redirects users to authorized A14 agents.
+      Secure gateway to the <strong>[A14] Agent</strong> — a decentralized system of Telegram-based assistants. Verifies encrypted access tokens and instantly redirects users to authorized A14 agents.
     </div>
     
     <div class="report-section">
       <div class="report-title">❌ Invalid or Expired Link</div>
-      <div>Report to [A14] Rebecca: <a href="https://t.me/A14_Assistant_bot" target="_blank" class="userid" style="text-decoration: none;">@A14_Assistant_bot</a></div>
+      <div class="report-content">Report to [A14] Rebecca: <a href="https://t.me/A14_Assistant_bot" target="_blank" class="userid">@A14_Assistant_bot</a></div>
     </div>
     
     <div class="footer">
-      Powered by Project-A14 • Code KWSA14 Active
+      POWERED BY PROJECT-A14 • CODE KWSA14 ACTIVE
     </div>
   </div>
 </body>
