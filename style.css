@@ -333,3 +333,13 @@ media (pointer: coarse) {
     opacity: 0 !important;
   }
 }
+
+@media (pointer: coarse) {
+  .pfp:focus,
+  .pfp:active,
+  a:focus,
+  a:active {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+}
