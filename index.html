@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>[A14] Redirector</title>
+  <title>[A14] Gateway</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
       background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
       color: #fff;
       display: flex;
@@ -16,24 +17,24 @@
       text-align: center;
     }
 
-    #message-box {
-      background: rgba(0, 0, 0, 0.5);
-      padding: 30px 40px;
-      border-radius: 15px;
-      box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+    #container {
       max-width: 500px;
-      animation: fadeIn 0.6s ease-in-out;
+      padding: 30px 40px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+      animation: fadeIn 0.4s ease-in-out;
     }
 
     h1 {
-      font-size: 2em;
+      font-size: 2.2em;
       margin-bottom: 10px;
-      color: #ff4e4e;
+      color: #00ffe7;
     }
 
     p {
       font-size: 1.1em;
-      margin-bottom: 20px;
+      margin: 10px 0;
     }
 
     a {
@@ -47,35 +48,47 @@
     }
 
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
   <script>
-    const username = "A14uploder_bot"; 
-    const path = window.location.pathname;
-    const base64 = path.substring(1); 
+    const username = "A14uploder_bot";
+    const base64 = window.location.pathname.substring(1);
 
-    window.onload = () => {
-      if (base64) {
-        const telegramUrl = `https://t.me/${username}?start=${base64}`;
-        window.location.href = telegramUrl;
+    // Check if visiting subpath
+    if (base64) {
+      try {
+        // Optional: Add real validation logic
+        if (/^[A-Za-z0-9\-\_:]+$/.test(base64)) {
+          const telegramUrl = `https://t.me/${username}?start=${base64}`;
+          window.location.replace(telegramUrl); // Faster than href
+        } else {
+          showInvalid();
+        }
+      } catch (err) {
+        showInvalid();
       }
-    };
+    }
+
+    function showInvalid() {
+      document.addEventListener("DOMContentLoaded", () => {
+        document.body.innerHTML = `
+          <div id="container">
+            <h1>❌ Invalid or Expired Link</h1>
+            <p>Something went wrong. Your link may be invalid or expired.</p>
+            <p>Need help? Talk to our assistant:</p>
+            <a href="https://t.me/A14_Assistant_bot" target="_blank">@A14_Assistant_bot</a>
+          </div>`;
+      });
+    }
   </script>
 </head>
 <body>
-  <div id="message-box">
-    <h1>❌ Invalid or Expired Link</h1>
-    <p>It seems the link is missing a valid code or it has expired.</p>
-    <p>Need help? Connect with an [A14] assistant below:</p>
-    <a href="https://t.me/A14_Assistant_bot" target="_blank">@A14_Assistant_bot</a>
+  <div id="container">
+    <h1>Welcome to [A14]</h1>
+    <p>This is your secure gateway to connect with our Telegram assistant bot.</p>
+    <p>Paste a valid invite or use <a href="https://t.me/A14_Assistant_bot" target="_blank">A14 Assistant</a>.</p>
   </div>
 </body>
 </html>
