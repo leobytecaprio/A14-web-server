@@ -5,7 +5,7 @@
   <title>[A14] SyncGate - Managed by Kiwi</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500&display=swap');
     
     * {
       margin: 0;
@@ -14,7 +14,7 @@
     }
     
     body {
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: 'Inter', sans-serif;
       background: 
         radial-gradient(circle at 20% 80%, rgba(220, 20, 60, 0.15) 0%, transparent 50%),
         radial-gradient(circle at 80% 20%, rgba(255, 193, 7, 0.15) 0%, transparent 50%),
@@ -98,21 +98,16 @@
       position: relative;
     }
     
-    .logo {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-    
     .pfp-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
       position: relative;
     }
     
     .pfp {
-      width: 90px;
-      height: 90px;
+      width: 120px;
+      height: 120px;
       border-radius: 50%;
       border: 3px solid rgba(220, 20, 60, 0.5);
       transition: all 0.3s ease;
@@ -124,9 +119,10 @@
       content: '';
       position: absolute;
       top: -3px;
-      left: -3px;
-      right: -3px;
-      bottom: -3px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 126px;
+      height: 126px;
       border-radius: 50%;
       background: linear-gradient(45deg, #dc143c, #ffc107, #dc143c);
       z-index: 1;
@@ -143,7 +139,14 @@
     }
     
     .title-section {
-      flex: 1;
+      text-align: center;
+    }
+    
+    .logo {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
     }
     
     .title {
@@ -165,30 +168,6 @@
       font-weight: 400;
       text-transform: uppercase;
       letter-spacing: 1px;
-    }
-    
-    .status-bar {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-top: 1rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
-      color: rgba(0, 255, 65, 0.8);
-    }
-    
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #00ff41;
-      animation: pulse-dot 2s infinite;
-    }
-    
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.8); }
     }
     
     .description {
@@ -250,7 +229,7 @@
     }
     
     .userid {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'Source Code Pro', monospace;
       background: rgba(0, 0, 0, 0.4);
       padding: 0.3rem 0.8rem;
       border-radius: 6px;
@@ -273,7 +252,7 @@
       font-size: 0.8rem;
       color: rgba(255, 193, 7, 0.6);
       font-weight: 300;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'Source Code Pro', monospace;
       border-top: 1px solid rgba(255, 193, 7, 0.1);
       padding-top: 1.5rem;
     }
@@ -377,18 +356,12 @@
           <div class="container error-container">
             <div class="tech-grid"></div>
             <div class="header">
-              <div class="logo">
-                <div class="pfp-container">
-                  <img src="https://files.catbox.moe/nyjkcw.jpg" alt="Kiwi Profile" class="pfp">
-                </div>
-                <div class="title-section">
-                  <h1 class="error-title">Access Denied</h1>
-                  <p class="subtitle">KWSA14 - Security Alert</p>
-                  <div class="status-bar">
-                    <div class="status-dot" style="background: #dc143c;"></div>
-                    <span style="color: #dc143c;">OFFLINE</span>
-                  </div>
-                </div>
+              <div class="pfp-container">
+                <img src="https://files.catbox.moe/nyjkcw.jpg" alt="Kiwi Profile" class="pfp">
+              </div>
+              <div class="title-section">
+                <h1 class="error-title">Access Denied</h1>
+                <p class="subtitle">KWSA14 - Security Alert</p>
               </div>
             </div>
             <div class="error-desc">
@@ -410,18 +383,12 @@
   <div class="container">
     <div class="tech-grid"></div>
     <div class="header">
-      <div class="logo">
-        <div class="pfp-container">
-          <img src="https://files.catbox.moe/nyjkcw.jpg" alt="Kiwi Profile" class="pfp">
-        </div>
-        <div class="title-section">
-          <h1 class="title">[A14] SyncGate</h1>
-          <p class="subtitle">Managed by Kiwi • KWSA14</p>
-          <div class="status-bar">
-            <div class="status-dot"></div>
-            <span>ONLINE</span>
-          </div>
-        </div>
+      <div class="pfp-container">
+        <img src="https://files.catbox.moe/nyjkcw.jpg" alt="Kiwi Profile" class="pfp">
+      </div>
+      <div class="title-section">
+        <h1 class="title">[A14] SyncGate</h1>
+        <p class="subtitle">Managed by Kiwi • KWSA14</p>
       </div>
     </div>
     
