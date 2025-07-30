@@ -211,6 +211,17 @@ body::before {
   font-size: 0.9rem;
 }
 
+.userid2 {
+  color: yellow;
+  text-decoration: none;
+  font-weight: bold; /* optional */
+}
+
+.userid2:hover {
+  color: gold; /* optional hover color */
+  text-decoration: none;
+}
+
 .userid {
   font-family: 'Source Code Pro', monospace;
   background: rgba(0, 0, 0, 0.4);
