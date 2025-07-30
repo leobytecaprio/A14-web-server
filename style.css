@@ -225,7 +225,7 @@ body::before {
 .userid {
   font-family: 'Source Code Pro', monospace;
   background: rgba(0, 0, 0, 0.4);
-  padding: 0.2rem 0.3rem
+  padding: 0.2rem 0.3rem;
   border-radius: 6px;
   color: #ffc107;
   font-size: 0.85rem;
