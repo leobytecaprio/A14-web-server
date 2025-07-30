@@ -324,7 +324,7 @@ body::before {
   }
 }
 
-media (pointer: coarse) {
+@media (pointer: coarse) {
   .pfp-container:hover .pfp {
     transform: none !important;
   }
@@ -357,4 +357,22 @@ media (pointer: coarse) {
     outline: none !important;
     box-shadow: none !important;
   }
+}
+
+@media (pointer: coarse) {
+  .pfp-container::before {
+    display: none !important;
+  }
+
+  .pfp-container:hover::before {
+    opacity: 0 !important;
+  }
+
+  .pfp-container:hover .pfp {
+    transform: none !important;
+  }
+}
+
+.pfp-container {
+  touch-action: manipulation;
 }
