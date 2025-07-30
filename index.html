@@ -2,21 +2,80 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Powered By : [A14]</title>
+  <title>[A14] Redirector</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    #message-box {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+      max-width: 500px;
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 10px;
+      color: #ff4e4e;
+    }
+
+    p {
+      font-size: 1.1em;
+      margin-bottom: 20px;
+    }
+
+    a {
+      color: #00c3ff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
   <script>
     const username = "A14uploder_bot"; 
     const path = window.location.pathname;
     const base64 = path.substring(1); 
 
-    if (base64) {
-      const telegramUrl = `https://t.me/${username}?start=${base64}`;
-      window.location.href = telegramUrl;
-    } else {
-      document.write("❌ Invalid link or base64 string missing.\n\nContact A14 Admins By ; @A14_Assistant_bot");
-    }
+    window.onload = () => {
+      if (base64) {
+        const telegramUrl = `https://t.me/${username}?start=${base64}`;
+        window.location.href = telegramUrl;
+      }
+    };
   </script>
 </head>
 <body>
-  <p>Redirecting to [A14] Agent</p>
+  <div id="message-box">
+    <h1>❌ Invalid or Expired Link</h1>
+    <p>It seems the link is missing a valid code or it has expired.</p>
+    <p>Need help? Connect with an [A14] assistant below:</p>
+    <a href="https://t.me/A14_Assistant_bot" target="_blank">@A14_Assistant_bot</a>
+  </div>
 </body>
 </html>
