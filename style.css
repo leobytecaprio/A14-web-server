@@ -334,11 +334,26 @@ media (pointer: coarse) {
   }
 }
 
+.pfp-container {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.pfp-container img {
+  -webkit-user-drag: none;
+  -webkit-tap-highlight-color: transparent;
+  pointer-events: none; /* optional if it's purely visual */
+}
+
 @media (pointer: coarse) {
-  .pfp:focus,
-  .pfp:active,
-  a:focus,
-  a:active {
+  .pfp-container:focus,
+  .pfp-container:active,
+  .pfp-container *:focus,
+  .pfp-container *:active {
     outline: none !important;
     box-shadow: none !important;
   }
