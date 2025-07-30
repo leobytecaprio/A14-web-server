@@ -212,7 +212,7 @@ body::before {
 }
 
 .userid2 {
-  color: yellow;
+  color: rgba(255, 193, 7, 0.6);
   text-decoration: none;
   font-weight: bold; /* optional */
 }
