@@ -2,60 +2,251 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>[A14] Gateway</title>
+  <title>[A14] Gateway - Managed by Kiwi</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    body {
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+    
+    * {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, sans-serif;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Orbitron', monospace;
+      background: #000;
+      color: #00ff41;
       height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    /* Animated background grid */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 65, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: grid-move 20s linear infinite;
+      z-index: -1;
+    }
+    
+    @keyframes grid-move {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(50px, 50px); }
+    }
+    
+    /* Glitch overlay */
+    body::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(0, 255, 65, 0.02) 50%,
+        transparent 100%
+      );
+      animation: scan 3s linear infinite;
+      z-index: -1;
+    }
+    
+    @keyframes scan {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+    
+    .container {
       text-align: center;
+      max-width: 600px;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.8);
+      border: 2px solid #00ff41;
+      border-radius: 0;
+      box-shadow: 
+        0 0 20px rgba(0, 255, 65, 0.3),
+        inset 0 0 20px rgba(0, 255, 65, 0.05);
+      animation: fade-in 1s ease-out;
+      position: relative;
     }
-
-    #container {
-      max-width: 500px;
-      padding: 30px 40px;
-      background: rgba(0, 0, 0, 0.6);
-      border-radius: 15px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
-      animation: fadeIn 0.4s ease-in-out;
+    
+    .container::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, #00ff41, #ff0080, #00ff41);
+      z-index: -1;
+      border-radius: 0;
+      opacity: 0.7;
+      animation: border-glow 2s linear infinite;
     }
-
-    h1 {
-      font-size: 2.2em;
-      margin-bottom: 10px;
-      color: #00ffe7;
+    
+    @keyframes border-glow {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
     }
-
-    p {
-      font-size: 1.1em;
-      margin: 10px 0;
+    
+    @keyframes fade-in {
+      from { 
+        opacity: 0; 
+        transform: translateY(20px) scale(0.9); 
+      }
+      to { 
+        opacity: 1; 
+        transform: translateY(0) scale(1); 
+      }
     }
-
-    a {
-      color: #00c3ff;
+    
+    .header {
+      margin-bottom: 2rem;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    
+    .pfp {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid #00ff41;
+      box-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(0, 255, 65, 0.5); }
+      50% { transform: scale(1.05); box-shadow: 0 0 25px rgba(0, 255, 65, 0.8); }
+    }
+    
+    .title {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 900;
+      color: #00ff41;
+      text-shadow: 0 0 10px rgba(0, 255, 65, 0.8);
+      letter-spacing: 3px;
+      margin: 0;
+    }
+    
+    .subtitle {
+      font-size: 0.9rem;
+      color: #ff0080;
+      margin-top: 0.5rem;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .description {
+      font-size: 1rem;
+      color: #888;
+      margin: 1.5rem 0;
+      line-height: 1.6;
+    }
+    
+    .agent-link {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: transparent;
+      border: 2px solid #00ff41;
+      color: #00ff41;
       text-decoration: none;
-      font-weight: bold;
+      font-family: 'Orbitron', monospace;
+      font-weight: 700;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
-
-    a:hover {
-      text-decoration: underline;
+    
+    .agent-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.2), transparent);
+      transition: left 0.5s;
     }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    
+    .agent-link:hover {
+      background: #00ff41;
+      color: #000;
+      box-shadow: 
+        0 0 20px rgba(0, 255, 65, 0.6),
+        inset 0 0 20px rgba(0, 0, 0, 0.2);
+      transform: translateY(-2px);
+    }
+    
+    .agent-link:hover::before {
+      left: 100%;
+    }
+    
+    .footer {
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: #444;
+      font-weight: 400;
+    }
+    
+    .glitch {
+      position: relative;
+      animation: glitch 1s infinite;
+    }
+    
+    @keyframes glitch {
+      0%, 90%, 100% { transform: translate(0); }
+      20% { transform: translate(-1px, 1px); }
+      40% { transform: translate(1px, -1px); }
+      60% { transform: translate(-1px, -1px); }
+      80% { transform: translate(1px, 1px); }
+    }
+    
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      .container {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+      
+      .pfp {
+        width: 50px;
+        height: 50px;
+      }
+      
+      .agent-link {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+      }
     }
   </style>
   <script>
     const username = "A14uploder_bot";
     const base64 = window.location.pathname.substring(1);
-
+    
     // Check if visiting subpath
     if (base64) {
       try {
@@ -70,25 +261,58 @@
         showInvalid();
       }
     }
-
+    
     function showInvalid() {
       document.addEventListener("DOMContentLoaded", () => {
         document.body.innerHTML = `
-          <div id="container">
-            <h1>❌ Invalid or Expired Link</h1>
-            <p>Something went wrong. Your link may be invalid or expired.</p>
-            <p>Need help? Talk to our assistant:</p>
-            <a href="https://t.me/A14_Assistant_bot" target="_blank">@A14_Assistant_bot</a>
+          <div class="container">
+            <div class="header">
+              <div class="logo">
+                <img src="https://files.catbox.moe/nyjkcw.jpg" alt="Kiwi Profile" class="pfp">
+                <div>
+                  <h1 class="title glitch">[A14] ERROR</h1>
+                  <p class="subtitle">KWSA14 - System Alert</p>
+                </div>
+              </div>
+            </div>
+            <div class="description">
+              <strong style="color: #ff0080;">INVALID OR EXPIRED LINK</strong><br>
+              Connection terminated. Your access token may be corrupted or expired.
+            </div>
+            <a href="https://t.me/A14_Assistant_bot" target="_blank" class="agent-link">
+              Contact Assistant
+            </a>
+            <div class="footer">
+              [A14] Neural Network • Managed by Kiwi
+            </div>
           </div>`;
       });
     }
   </script>
 </head>
 <body>
-  <div id="container">
-    <h1>Welcome to [A14]</h1>
-    <p>This is your secure gateway to connect with our Telegram assistant bot.</p>
-    <p>Paste a valid invite or use <a href="https://t.me/A14_Assistant_bot" target="_blank">A14 Assistant</a>.</p>
+  <div class="container">
+    <div class="header">
+      <div class="logo">
+        <img src="https://files.catbox.moe/nyjkcw.jpg" alt="Kiwi Profile" class="pfp">
+        <div>
+          <h1 class="title">[A14] GATEWAY</h1>
+          <p class="subtitle">Managed by Kiwi • KWSA14</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="description">
+      Neural interface initialized. Establishing secure connection to [A14] Agent network.
+    </div>
+    
+    <a href="https://t.me/A14_Assistant_bot" target="_blank" class="agent-link">
+      Connect to Agent
+    </a>
+    
+    <div class="footer">
+      [A14] Neural Network • Code KWSA14 Active
+    </div>
   </div>
 </body>
 </html>
