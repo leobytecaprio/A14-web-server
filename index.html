@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Redirecting…</title>
+  <script>
+    const username = "A14uploaderV2_bot"; 
+    const path = window.location.pathname;
+    const base64 = path.substring(1); 
+
+    if (base64) {
+      const telegramUrl = `https://t.me/${username}?start=${base64}`;
+      window.location.href = telegramUrl;
+    } else {
+      document.write("❌ Invalid link or base64 string missing.");
+    }
+  </script>
+</head>
+<body>
+  <p>Redirecting to Telegram…</p>
+</body>
+</html>
